@@ -21,7 +21,6 @@ public class JpaLeakRepositoryImpl implements LeakCustomRepository {
                 .addScalar("counter")
                 .addScalar("name")
                 .addScalar("last")
-                .addSynchronizedQuerySpace("leak_entity")
                 .setResultTransformer(Transformers.aliasToBean(TestEntityDto.class)).list();
     }
 }

@@ -1,0 +1,24 @@
+# build env variable controls what application.properties file is included in the container
+version: "3.2"
+services:
+  web-app-seb:
+    build:
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+    ports:
+      - "8081:8080"
+    volumes:
+      - resources-volume:/resources
+    environment:
+      SEB_WEB_APP: '{"spring.datasource.url":"jdbc:postgresql://database/leak","spring.datasource.username":"postgres","spring.datasource.password":"postgres"}'
+  database:
+    image: postgres:9.5-alpine
+    environment:
+      POSTGRES_DB: leak
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+volumes:
+  resources-volume:
